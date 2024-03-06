@@ -1,0 +1,51 @@
+abstract class Employee {
+    protected String name;
+    protected int id;
+    protected double baseSalary;
+
+    public Employee(String name, int id, double baseSalary) {
+        this.name = name;
+        this.id = id;
+        this.baseSalary = baseSalary;
+    }
+
+    public abstract double calculateSalary();
+}
+
+class NormalEmployee extends Employee {
+    public NormalEmployee(String name, int id, double baseSalary) {
+        super(name, id, baseSalary);
+    }
+
+    @Override
+    public double calculateSalary() {
+        // Assuming salary calculation for a normal employee is base salary only
+        return baseSalary;
+    }
+}
+
+class BonusEmployee extends Employee {
+    private double bonusPercentage;
+
+    public BonusEmployee(String name, int id, double baseSalary, double bonusPercentage) {
+        super(name, id, baseSalary);
+        this.bonusPercentage = bonusPercentage;
+    }
+
+    @Override
+    public double calculateSalary() {
+        // Salary calculation for an employee with bonus
+        return baseSalary + (baseSalary * bonusPercentage / 100);
+    }
+}
+
+// Testing the employees
+public class Main {
+    public static void main(String[] args) {
+        NormalEmployee employee1 = new NormalEmployee("John", 101, 50000);
+        BonusEmployee employee2 = new BonusEmployee("Alice", 102, 60000, 10);
+
+        System.out.println("Employee 1 Salary: " + employee1.calculateSalary());
+        System.out.println("Employee 2 Salary: " + employee2.calculateSalary());
+    }
+}
